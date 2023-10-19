@@ -10,13 +10,13 @@
         transform: scale(1.1);
     }
 
-.media{
-    display:flex;
+.media {
+    display: flex;
     align-items: flex-start;
 }
 
-.media-body{
-    flex:1;
+.media-body {
+    flex: 1;
 }
 
 .media-img-wrapper {
@@ -26,6 +26,11 @@
 
 .price {
     color: green;
+}
+
+.page-selection {
+    margin-right: 15px;
+    margin-bottom: 30px;
 }
 
 @media (max-width: 1023.98px) {

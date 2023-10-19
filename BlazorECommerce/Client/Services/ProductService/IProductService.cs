@@ -9,7 +9,10 @@ namespace BlazorECommerce.Client.Services.ProductService
         string Message { get; set; }
         Task GetProducts(string? categoryUrl = null);
         Task<ServiceResponse<Product>> GetProduct(int productId);
-        Task SearchProducts(string searchText);
+        int CurrentPage { get; set; }
+        int PageCount { get; set; }
+        string LastSearchText { get; set; }
+        Task SearchProducts(string searchText, int page);
         Task<List<string>> GetProductSearchSuggestions(string searchText);
     }
 }
