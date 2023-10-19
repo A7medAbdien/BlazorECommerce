@@ -26,17 +26,17 @@ namespace BlazorEcommerce.Server.Controllers
         {
             var result = await _productService.GetProduct(productId);
             return Ok(result);
-        } 
+        }
         [HttpGet("category/{categoryUrl}")]
         public async Task<ActionResult<List<Product>>> GetProductsByCategory(string categoryUrl)
         {
             var result = await _productService.GetProductsByCategory(categoryUrl);
             return Ok(result);
         }
-        [HttpGet("search/{searchText}")]
-        public async Task<ActionResult<List<Product>>> SearchProducts(string searchText)
+        [HttpGet("search/{searchText}/{page}")]
+        public async Task<ActionResult<ProductSearchResultDTO>> SearchProducts(string searchText, int page = 1)
         {
-            var result = await _productService.SearchProducts(searchText);
+            var result = await _productService.SearchProducts(searchText, page);
             return Ok(result);
         }
         [HttpGet("searchsuggestions/{searchText}")]
