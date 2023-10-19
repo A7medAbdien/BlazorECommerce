@@ -5,8 +5,14 @@
 
 <PageTitle>Shop</PageTitle>
 
-<ProductList />
-
+@if (SearchText == null && CategoryUrl == null)
+{
+    <FeaturedProducts />
+}
+else
+{
+    <ProductList />
+}
 @code{
     [Parameter]
     public string? CategoryUrl { get; set; } = null;
