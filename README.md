@@ -27,3 +27,14 @@ This project was following this [course](https://www.udemy.com/course/blazor-eco
 9. Modify AddToCart in CartService
 10. Add UpdateQuantity in CartService
 11. Add UpdateQuantity UI
+
+
+## user register
+
+weirdly the instructor started from UI not Backend
+
+**Instructor Approach:**
+
+1. Register Form UI
+2. 
+
