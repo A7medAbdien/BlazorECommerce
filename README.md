@@ -10,3 +10,20 @@ that covers:
 5. Payment
 
 This project was following this [course](https://www.udemy.com/course/blazor-ecommerce/)
+
+## create Cart
+
+1. add Local Storage package
+2. create CartItem model
+3. create a UI - button to add to cart (named CartCounter)
+4. CartService on CLIENT side 
+   1. event
+   2. AddToCart
+   3. GetCartItems
+5. Turn CartItem to Products by calling SERVER - DTO
+6. Create Cart page
+7. Add RemoveProductFromCart
+8. Add Quantity to Cart Model
+9. Modify AddToCart in CartService
+10. Add UpdateQuantity in CartService
+11. Add UpdateQuantity UI
