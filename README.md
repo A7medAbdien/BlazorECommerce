@@ -36,5 +36,15 @@ weirdly the instructor started from UI not Backend
 **Instructor Approach:**
 
 1. Register Form UI
-2. 
+2. MODEL-SERVER
+3. FETCH-CLIENT - so here we edit the UI not creating it, maybe because its a POST
 
+**Overall**
+
+* SERVER: 
+   1. receive email and password
+   2. saves decoded password and email in the database
+   3. return user id in the database
+* CLIENT:
+   1. posts email and password
+   2. expects an id in return 
