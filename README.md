@@ -43,8 +43,20 @@ weirdly the instructor started from UI not Backend
 
 * SERVER: 
    1. receive email and password
-   2. saves decoded password and email in the database
+   2. saves encoded password and email in the database
    3. return user id in the database
 * CLIENT:
    1. posts email and password
    2. expects an id in return 
+
+
+## User Login
+
+1. Login form UI and MODEL
+2. add our App Key Token in appsettings file
+3. SERVER - receive email and password
+   1. email: check if user exist
+   2. password: uses key to check if the hashes are equal
+   3. create tokens
+4. CLIENT - post email and password and expect token(string) in return
+ 
