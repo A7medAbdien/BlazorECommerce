@@ -5,12 +5,12 @@ namespace BlazorECommerce.Server.Services.CartService
     public class CartService : ICartService
     {
         private readonly DataContext _context;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IAuthService _authService;
 
-        public CartService(DataContext context, IHttpContextAccessor httpContextAccessor)
+        public CartService(DataContext context, IAuthService authService)
         {
             _context = context;
-            _httpContextAccessor = httpContextAccessor;
+            _authService = authService;
         }
 
         public async Task<ServiceResponse<List<CartProductResponse>>> GetCartProducts(List<CartItem> cartItems)
@@ -143,6 +143,6 @@ namespace BlazorECommerce.Server.Services.CartService
             return new ServiceResponse<bool> { Data = true };
         }
 
-        private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+        private int GetUserId() => _authService.GetUserId();
     }
 }
