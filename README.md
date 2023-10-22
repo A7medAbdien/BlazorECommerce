@@ -60,3 +60,9 @@ weirdly the instructor started from UI not Backend
    3. create tokens
 4. CLIENT - post email and password and expect token(string) in return
  
+## Cart form local storage to DB
+
+1. prepare/edit Model to have an Id - CartItem
+2. create the model table
+3. CLIENT: different behavior of AddToCart - un/authorized users
+4. SERVER: add StoreCartItems to service and controller
