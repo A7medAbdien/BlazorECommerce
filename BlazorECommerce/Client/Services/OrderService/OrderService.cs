@@ -1,27 +1,41 @@
-﻿namespace BlazorECommerce.Client.Services.OrderService
+﻿using Microsoft.AspNetCore.Components;
+
+namespace BlazorECommerce.Client.Services.OrderService
 {
     public class OrderService : IOrderService
     {
         private readonly HttpClient _http;
-        private readonly AuthenticationStateProvider _authStateProvider;
+        private readonly NavigationManager _navigationManager;
+        private readonly IAuthService _authService;
 
-        public OrderService(HttpClient http, AuthenticationStateProvider authStateProvider)
+        public OrderService(HttpClient http, NavigationManager navigationManager, IAuthService authService)
         {
             _http = http;
-            _authStateProvider = authStateProvider;
+            _navigationManager = navigationManager;
+            _authService = authService;
         }
 
         public async Task PlaceOrder()
         {
-            if (await IsUserAuthenticated())
+            if (await _authService.IsUserAuthenticated())
             {
                 await _http.PostAsync("api/order", null);
             }
+            else
+            {
+                _navigationManager.NavigateTo("login");
+            }
+        }
+        public async Task<OrderDetailsDTO> GetOrderDetails(int orderId)
+        {
+            var result = await _http.GetFromJsonAsync<ServiceResponse<OrderDetailsDTO>>($"api/order/{orderId}");
+            return result.Data;
         }
 
-        private async Task<bool> IsUserAuthenticated()
+        public async Task<List<OrderOverviewDTO>> GetOrders()
         {
-            return (await _authStateProvider.GetAuthenticationStateAsync()).User.Identity.IsAuthenticated;
+            var result = await _http.GetFromJsonAsync<ServiceResponse<List<OrderOverviewDTO>>>("api/order");
+            return result.Data;
         }
     }
 }
