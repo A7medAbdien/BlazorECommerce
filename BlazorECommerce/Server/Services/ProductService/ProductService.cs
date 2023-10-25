@@ -23,6 +23,7 @@ namespace BlazorECommerce.Server.Services.ProductService
                 product = await _context.Products
                     .Include(p => p.Variants.Where(v => !v.Deleted))
                     .ThenInclude(v => v.ProductType)
+                    .Include(p => p.Images)
                     .FirstOrDefaultAsync(p => p.Id == productId && !p.Deleted);
             }
             else
@@ -30,6 +31,7 @@ namespace BlazorECommerce.Server.Services.ProductService
                 product = await _context.Products
                     .Include(p => p.Variants.Where(v => v.Visible && !v.Deleted))
                     .ThenInclude(v => v.ProductType)
+                    .Include(p => p.Images)
                     .FirstOrDefaultAsync(p => p.Id == productId && !p.Deleted && p.Visible);
             }
 
@@ -53,6 +55,7 @@ namespace BlazorECommerce.Server.Services.ProductService
                 Data = await _context.Products
                 .Where(p => p.Visible && !p.Deleted)
                 .Include(p => p.Variants.Where(v => v.Visible && !v.Deleted))
+                .Include(p => p.Images)
                 .ToListAsync()
             };
 
@@ -66,6 +69,7 @@ namespace BlazorECommerce.Server.Services.ProductService
                 Data = await _context.Products
                     .Where(p => p.Category.Url.ToLower().Equals(categoryUrl.ToLower()) && p.Visible && !p.Deleted)
                     .Include(p => p.Variants.Where(v => v.Visible && !v.Deleted))
+                    .Include(p => p.Images)
                     .ToListAsync()
             };
             return response;
@@ -81,6 +85,7 @@ namespace BlazorECommerce.Server.Services.ProductService
                                 p.Description.ToLower().Contains(searchText.ToLower()) &&
                                 p.Visible && !p.Deleted)
                                 .Include(p => p.Variants.Where(v => v.Visible && !v.Deleted))
+                                .Include(p => p.Images)
                                 .Skip((page - 1) * (int)pageResults)
                                 .Take((int)pageResults)
                                 .ToListAsync();
@@ -152,6 +157,7 @@ namespace BlazorECommerce.Server.Services.ProductService
                                     p.Description.ToLower().Contains(searchText.ToLower()) &&
                                     p.Visible && !p.Deleted)
                                 .Include(p => p.Variants.Where(v => v.Visible && !v.Deleted))
+                                .Include(p => p.Images)
                                 .ToListAsync();
         }
 
@@ -161,14 +167,15 @@ namespace BlazorECommerce.Server.Services.ProductService
             {
                 Data = await _context.Products
                     .Where(p => !p.Deleted)
-                    .Include(p => p.Variants.Where(v => !v.Deleted))
+                    .Include(p => p.Variants.Where(v => v.Visible && !v.Deleted))
                     .ThenInclude(v => v.ProductType)
+                    .Include(p => p.Images)
                     .ToListAsync()
             };
 
             return response;
         }
-        
+
         public async Task<ServiceResponse<Product>> CreateProduct(Product product)
         {
             foreach (var variant in product.Variants)
@@ -201,7 +208,9 @@ namespace BlazorECommerce.Server.Services.ProductService
 
         public async Task<ServiceResponse<Product>> UpdateProduct(Product product)
         {
-            var dbProduct = await _context.Products.FindAsync(product.Id);
+            var dbProduct = await _context.Products
+                .Include(p => p.Images)
+                .FirstOrDefaultAsync(p => p.Id == product.Id);;
             if (dbProduct == null)
             {
                 return new ServiceResponse<Product>
@@ -237,6 +246,11 @@ namespace BlazorECommerce.Server.Services.ProductService
                     dbVariant.Deleted = variant.Deleted;
                 }
             }
+
+            var productImages = dbProduct.Images;
+            _context.Images.RemoveRange(productImages);
+
+            dbProduct.Images = product.Images;
 
             await _context.SaveChangesAsync();
             return new ServiceResponse<Product> { Data = product };
