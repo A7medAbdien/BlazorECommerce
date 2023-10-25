@@ -6,6 +6,7 @@ namespace BlazorECommerce.Client.Services.ProductService
     {
         event Action ProductsChanged;
         List<Product> Products { get; set; }
+        List<Product> AdminProducts { get; set; }
         string Message { get; set; }
         Task GetProducts(string? categoryUrl = null);
         Task<ServiceResponse<Product>> GetProduct(int productId);
@@ -14,5 +15,9 @@ namespace BlazorECommerce.Client.Services.ProductService
         string LastSearchText { get; set; }
         Task SearchProducts(string searchText, int page);
         Task<List<string>> GetProductSearchSuggestions(string searchText);
+        Task GetAdminProducts();
+        Task<Product> CreateProduct(Product product);
+        Task<Product> UpdateProduct(Product product);
+        Task DeleteProduct(Product product);
     }
 }
