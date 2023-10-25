@@ -30,6 +30,13 @@ namespace BlazorECommerce.Server.Controllers
             return Ok(response);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ServiceResponse<List<ProductType>>>> DeleteProductType(int id)
+        {
+            var result = await _productTypeService.DeleteProductType(id);
+            return Ok(result);
+        }
+
         [HttpPut]
         public async Task<ActionResult<ServiceResponse<List<ProductType>>>> UpdateProductType(ProductType productType)
         {

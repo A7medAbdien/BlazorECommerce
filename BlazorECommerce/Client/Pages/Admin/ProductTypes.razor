@@ -5,6 +5,12 @@
 
 <h3>Product Types</h3>
 
+<div class="header">
+    <div class="col">Name</div>
+    <div class="col">Visible</div>
+    <div class="col"></div>
+</div>
+
 @foreach (var productType in ProductTypeService.ProductTypes)
 {
     @if (productType.Editing)
@@ -14,9 +20,15 @@
                 <div class="col">
                     <InputText @bind-Value="editingProductType.Name" class="form-control"></InputText>
                 </div>
+                <div class="col col-visible">
+                    <InputCheckbox @bind-Value="editingProductType.Visible" style="transform: scale(1.5,1.5);"></InputCheckbox>
+                </div>
                 <div class="col">
                     <button type="submit" class="btn btn-primary">
                         <i class="oi oi-cloud-upload"></i>
+                    </button>
+                    <button class="btn btn-primary" @onclick="CancelEditing">
+                        <i class="oi oi-circle-x"></i>
                     </button>
                 </div>
             </div>
@@ -28,9 +40,15 @@
             <div class="col">
                 @productType.Name
             </div>
+            <div class="col col-visible">
+                <span>@(productType.Visible ? "✔️" : "")</span>
+            </div>
             <div class="col">
                 <button class="btn btn-primary" @onclick="@(() => EditProductType(productType))">
                     <i class="oi oi-pencil"></i>
+                </button>
+                <button class="btn btn-primary" @onclick="(() => DeleteProductType(productType.Id))">
+                    <i class="oi oi-trash"></i>
                 </button>
             </div>
         </div>
@@ -54,15 +72,15 @@
         ProductTypeService.OnChange -= StateHasChanged;
     }
 
+    private void CreateNewProductType()
+    {
+        editingProductType = ProductTypeService.CreateNewProductType();
+    }
+
     private void EditProductType(ProductType productType)
     {
         productType.Editing = true;
         editingProductType = productType;
-    }
-
-    private void CreateNewProductType()
-    {
-        editingProductType = ProductTypeService.CreateNewProductType();
     }
 
     private async Task UpdateProductType()
@@ -72,5 +90,16 @@
         else
             await ProductTypeService.UpdateProductType(editingProductType);
         editingProductType = new ProductType();
+    }
+
+    private async Task CancelEditing()
+    {
+        editingProductType = new ProductType();
+        await ProductTypeService.GetProductTypes();
+    }
+
+    private async Task DeleteProductType(int id)
+    {
+        await ProductTypeService.DeleteProductType(id);
     }
 }

@@ -13,6 +13,14 @@
 
         public event Action OnChange;
 
+        public async Task GetProductTypes()
+        {
+            var result = await _http
+                .GetFromJsonAsync<ServiceResponse<List<ProductType>>>("api/producttype");
+            if (result != null && result.Data != null)
+                ProductTypes = result.Data;
+        }
+
         public async Task AddProductType(ProductType productType)
         {
             var response = await _http.PostAsJsonAsync("api/producttype", productType);
@@ -30,11 +38,13 @@
             return newProductType;
         }
 
-        public async Task GetProductTypes()
+        public async Task DeleteProductType(int productTypeId)
         {
-            var result = await _http
-                .GetFromJsonAsync<ServiceResponse<List<ProductType>>>("api/producttype");
-            ProductTypes = result.Data;
+            var response = await _http.DeleteAsync($"api/producttype/{productTypeId}");
+            ProductTypes = (await response.Content
+                .ReadFromJsonAsync<ServiceResponse<List<ProductType>>>()).Data;
+            //await GetProductTypes();
+            OnChange.Invoke();
         }
 
         public async Task UpdateProductType(ProductType productType)
@@ -42,6 +52,7 @@
             var response = await _http.PutAsJsonAsync("api/producttype", productType);
             ProductTypes = (await response.Content
                 .ReadFromJsonAsync<ServiceResponse<List<ProductType>>>()).Data;
+            //await GetProductTypes();
             OnChange.Invoke();
         }
     }

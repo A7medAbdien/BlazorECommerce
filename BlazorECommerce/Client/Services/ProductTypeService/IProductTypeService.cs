@@ -6,6 +6,7 @@
         public List<ProductType> ProductTypes { get; set; }
         Task GetProductTypes();
         Task AddProductType(ProductType productType);
+        Task DeleteProductType(int productTypeId);
         Task UpdateProductType(ProductType productType);
         ProductType CreateNewProductType();
     }
