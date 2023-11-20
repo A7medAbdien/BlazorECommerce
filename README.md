@@ -1,174 +1,74 @@
-# BlazorECommerce
+# Blazor-ECommerce
 
-This project is intended to be a full stack template for small businesses use cases,
-that covers:
+Blazor-ECommerce is an E-Commerce website built using .NET framework, specifically Blazor pages. It provides a solution for managing store products and making them available online for customers to purchase. The website includes two roles: Admin and user/customer, and integrates with Stripe for payment processing.
 
-1. User Auth
-2. CURD operations
-3. Dockerizing
-4. Deployment
-5. Payment
+## Problem
 
-This project was following this [course](https://www.udemy.com/course/blazor-ecommerce/)
+The primary problem addressed by Blazor-ECommerce is the need to efficiently manage store products and offer them for online purchase. Traditional methods of manual inventory management and brick-and-mortar stores can be time-consuming and limit the potential customer base. By creating an E-Commerce website, businesses can reach a wider audience and streamline the process of product management and sales.
 
-## create Cart
+## Solution
 
-1. add Local Storage package
-2. create CartItem model
-3. create a UI - button to add to cart (named CartCounter)
-4. CartService on CLIENT side 
-   1. event
-   2. AddToCart
-   3. GetCartItems
-5. Turn CartItem to Products by calling SERVER - DTO
-6. Create Cart page
-7. Add RemoveProductFromCart
-8. Add Quantity to Cart Model
-9. Modify AddToCart in CartService
-10. Add UpdateQuantity in CartService
-11. Add UpdateQuantity UI
+Blazor-ECommerce offers a comprehensive solution for building an E-Commerce website. It leverages the power of .NET framework and utilizes Blazor pages as the primary technology for developing the user interface. The website incorporates two user roles: Admin and user/customer.
 
+Administrators have access to features such as managing product inventory, setting prices, updating product information, and monitoring sales. Users/customers can browse products, add them to the cart, and proceed with the checkout process.
 
-## user register
+Stripe, a popular payment gateway, is integrated into the website to handle secure and seamless payment transactions. This ensures that customers can safely make purchases using various payment methods supported by Stripe.
 
-weirdly the instructor started from UI not Backend
+## Environment and Tools
 
-**Instructor Approach:**
+Blazor-ECommerce is developed using the following environment and tools:
 
-1. Register Form UI
-2. MODEL-SERVER
-3. FETCH-CLIENT - so here we edit the UI not creating it, maybe because its a POST
+- Visual Studio 2022: The latest version of Microsoft's integrated development environment (IDE), providing a rich set of tools for building .NET applications.
+- SQL Server 2022: A robust relational database management system (RDBMS) used to store and manage product data.
+- SQL Server Management Studio (SSMS) 19.1: A graphical tool for managing SQL Server databases, used for tasks such as querying and database administration.
 
-**Overall**
+## Tools and Techniques
 
-* SERVER: 
-   1. receive email and password
-   2. saves encoded password and email in the database
-   3. return user id in the database
-* CLIENT:
-   1. posts email and password
-   2. expects an id in return 
+Blazor-ECommerce incorporates the following tools and techniques:
 
+- Blazor pages: A web UI framework for building interactive client-side applications using .NET.
+- Bootstrap: A popular CSS framework for creating responsive and visually appealing web pages.
+- Swagger UI: A tool for automatically generating interactive API documentation, making it easier to explore and test the RESTful API.
+- Entity Framework: An object-relational mapping (ORM) framework that simplifies database access and manipulation in .NET applications.
 
-## User Login
+The following techniques are utilized in the development of Blazor-ECommerce:
 
-1. Login form UI and MODEL
-2. add our App Key Token in appsettings file
-3. SERVER - receive email and password
-   1. email: check if user exist
-   2. password: uses key to check if the hashes are equal
-   3. create tokens
-4. CLIENT - post email and password and expect token(string) in return
- 
-## Cart form local storage to DB
+- RESTful API: The website follows the principles of Representational State Transfer (REST) for designing its API endpoints, enabling interoperability and scalability.
+- CRUD Operations: The application supports Create, Read, Update, and Delete operations for managing product inventory and user information.
+- Service Design Pattern: The application architecture follows the Service design pattern, which promotes loose coupling and separation of concerns.
+- JWT (JSON Web Token): JSON Web Tokens are used for authentication and authorization, ensuring secure access to protected resources.
 
-purpose: migrating LS with DB -> 
-1. store LS in DB
-2. if user authorized? get its cart form db: get cart form LS
+## Course
 
-1. prepare/edit Model to have an Id - CartItem 
-2. create the model table 
-3. CLIENT: different behavior of AddToCart - un/authorized users
-4. SERVER: add StoreCartItems to service and controller - args cartItems & userID, return cartItems as Products
-5. CLIENT: add StoreCartItems to service - posts cartItems and empty LS
-6. CLIENT: apply StoreCartItems on HandleLogin
-7. SERVER: allow service to access authenticated user id
+This project was developed following the course titled "Blazor-ECommerce" on Udemy. The course provides comprehensive guidance and hands-on exercises for building an E-Commerce website using Blazor and .NET framework. You can find the course [here](https://www.udemy.com/course/blazor-ecommerce/).
 
-### get cart count from server
+## Getting Started
 
-1. SERVER: add getCartCount function
-2. CLIENT: fetch getCartCount
-3. CLIENT: if user auth? get form SERVER: get from LS
-4. CLIENT: apply getCartCount on GetCartItems, AddToCart, RemoveFromCart, HandleLogin and HandlesLogout 
+To get started with Blazor-ECommerce, follow these steps:
 
+1. Clone the repository: `git clone https://github.com/your-username/Blazor-ECommerce.git`
+2. Open the solution in Visual Studio 2022.
+3. Restore the NuGet packages.
+4. Set up the SQL Server database using the provided SQL scripts or migrations.
+5. Configure the Stripe payment gateway with your API keys.
+6. Build and run the application.
 
-8. SERVER: add GetDbCartProducts
-9. CLIENT: fetch GetDbCartProducts - and he first merged GetCartItems with GetCartProducts, so if user auth? get from SERVER: get from LS
-10. CLIENT: apply it on LoadCart  
+## Contributing
 
-TL;DR if user auth? get from SERVER: get from LS
+Contributions to Blazor-ECommerce are welcome! If you encounter any bugs or have suggestions for improvements, please open an issue on the GitHub repository. You can also submit pull requests for new features or bug fixes.
 
-# Qs
+Before contributing, please review the contribution guidelines to ensure a smooth collaboration process.
 
-## Cart Implementation - is it ok to do a server call on each CRUD operation? 
+## License
 
-I will do my best to make this question clear...
+Blazor-ECommerce is open-source software released under the [MIT License](https://opensource.org/licenses/MIT). You are free to use, modify, and distribute the codebase in accordance with the terms of the license.
 
-I am watching a tutorial about ECommerce Website with .Net Core - and the project is of type **Web Assembly Blazor** and I checked the .NET CORE Hosted, so the project spited to Client, Server and Sheared.
+## Acknowledgments
 
-And the Cart model is consists of CartId, ProductId and UserId.
+We would like to acknowledge the following resources and libraries that have been instrumental in the development of Blazor-ECommerce:
 
-```c#
-    public class CartItem
-    {
-        public int CartId { get; set; }
-        public int UserId { get; set; }
-        public int ProductId { get; set; }
-        public int Quantity { get; set; } = 1;
-    }
-```
-
-When the instructor implemented the Cart Model he was using the local storage only on the client side and he gets the Product details with a one server Call  
-
-Server service
-
-```c#
-    public interface ICartService
-    {
-        Task<ServiceResponse<List<CartProductResponse>>> GetCartProducts(List<CartItem> cartItems);
-    }
-```
-
-Client service
-
-```c#
-    public interface ICartService
-    {
-        event Action OnChange;
-        Task AddToCart(CartItem cartItem);
-        Task<List<CartItem>> GetCartItems();
-        Task<List<CartProductResponse>> GetCartProducts(); 
-        Task RemoveProductFromCart(int productId, int productTypeId);
-        Task UpdateQuantity(CartProductResponse product);
-    }
-```
-
-So until now every thing make sense in my brian, all CURD operations are mainly on the Client side. But after he did the migration of local storage to the database. The CRUD operations are on both client and server side
-
-Server service
-
-```c#
-    public interface ICartService
-    {
-        Task<ServiceResponse<List<CartProductResponse>>> GetCartProducts(List<CartItem> cartItems);
-        Task<ServiceResponse<List<CartProductResponse>>> StoreCartItems(List<CartItem> cartItems);
-        Task<ServiceResponse<int>> GetCartItemsCount();
-        Task<ServiceResponse<List<CartProductResponse>>> GetDbCartProducts();
-        Task<ServiceResponse<bool>> AddToCart(CartItem cartItem);
-        Task<ServiceResponse<bool>> UpdateQuantity(CartItem cartItem);
-        Task<ServiceResponse<bool>> RemoveItemFromCart(int productId, int productTypeId);
-    }
-```
-
-Client service
-
-```c#
-public interface ICartService
-{
-   event Action OnChange;
-   Task AddToCart(CartItem cartItem);
-   Task<List<CartProductResponse>> GetCartProducts();
-   Task RemoveProductFromCart(int productId, int productTypeId);
-   Task UpdateQuantity(CartProductResponse product);
-   Task StoreCartItems(bool emptyLocalCart);
-   Task GetCartItemsCount();
-}
-```
-
-My questions is:
-
-Is that Ok/practical? having a call to the server on each cart change/update?
-
-My suggestion: 
-
-if we could update the server side on section ends or on checkout only, but i have no idea if this possible or not
+- Blazor documentation: [https://docs.microsoft.com/en-us/aspnet/core/blazor](https://docs.microsoft.com/en-us/aspnet/core/blazor)
+- Bootstrap documentation: [https://getbootstrap.com/docs](https://getbootstrap.com/docs)
+- Stripe documentation: [https://stripe.com/docs](https://stripe.com/docs)
+- Entity Framework documentation: [https://docs.microsoft.com/en-us/ef](https://docs.microsoft.com/en-us/ef)
+- JWT documentation: [https://jwt.io/introduction](https://jwt.io/introduction)
