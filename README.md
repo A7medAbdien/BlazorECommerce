@@ -1,5 +1,7 @@
 # Blazor-ECommerce
 
+![Some Images about the website](ReadmeImage.PNG)
+
 Blazor-ECommerce is an E-Commerce website built using .NET framework, specifically Blazor pages. It provides a solution for managing store products and making them available online for customers to purchase. The website includes two roles: Admin and user/customer, and integrates with Stripe for payment processing.
 
 ## Problem
