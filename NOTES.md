@@ -172,3 +172,18 @@ Is that Ok/practical? having a call to the server on each cart change/update?
 My suggestion: 
 
 if we could update the server side on section ends or on checkout only, but i have no idea if this possible or not
+
+# Archived post 
+
+this is an E-Commerce website, too close to one of my last projects ProShop, but developed with .Net, SQL Server 2022, SSMS (SQL Server Management Studio) 19.1 and Payment via strip and the cart stored on server.
+
+Thrilled to share a classic project, [ProShop](https://github.com/A7medAbdien/proshop) - an E-Commerce website developed using the MERN stack. Postman was utilized for testing and seamlessly integrating payment options. Although PayPal integration was effortless, it is unavailable in my region. However, Checkout and Tap are excellent alternatives worth exploring.
+
+#MERNStack #React #Express #MongoDB #NodeJS #ECommerce #WebsiteDevelopment #APIIntegration #PaymentOptions #SecureTransactions #TechEnthusiasts
+
+Blazor-ECommerce (E-Commerce website using .NET) 🔗
+Problem: Manage store products and make them available online for customers to purchase.
+Solution: An E-Commerce website with two roles: Admin and user/customer, allowing payment via Stripe.
+Environment: Visual studio 2022, SQL Server 2022, SSMS (SQL Server Management Studio) 19.1.
+Tools used: Blazer pages, Bootstrap, Swagger UI, Entity Framework.
+Techniques: RESTful API, CRUD operations, Service Design Pattern, JWT (JSON Web Token).

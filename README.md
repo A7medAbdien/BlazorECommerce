@@ -72,3 +72,13 @@ We would like to acknowledge the following resources and libraries that have bee
 - Stripe documentation: [https://stripe.com/docs](https://stripe.com/docs)
 - Entity Framework documentation: [https://docs.microsoft.com/en-us/ef](https://docs.microsoft.com/en-us/ef)
 - JWT documentation: [https://jwt.io/introduction](https://jwt.io/introduction)
+
+# Post 
+
+Exciting News! I'm thrilled to introduce my latest project (https://github.com/A7medAbdien/BlazorECommerce), an E-Commerce website developed with .NET, SQL Server 2022, and SSMS (SQL Server Management Studio) 19.1. This project is inspired by my previous successful venture, ProShop, but with a twist. The website incorporates the powerful capabilities of .NET and SQL Server to deliver a robust and scalable platform for online shopping.
+
+One of the key highlights of this project is the integration of Stripe as the payment gateway, ensuring secure and seamless transactions for customers. Additionally, I have implemented a server-side cart storage mechanism, providing a convenient and reliable shopping experience.
+
+Building upon the foundation of ProShop, I have leveraged the flexibility and performance of .NET and SQL Server to create a tailor-made E-Commerce solution.
+
+#ECommerce #DotNet #SQLServer #SSMS #StripePayment #ServerSideCart #OnlineShopping #WebDevelopment
